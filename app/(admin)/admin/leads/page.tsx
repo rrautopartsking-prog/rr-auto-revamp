@@ -1,4 +1,6 @@
 import { LeadsTable } from "@/components/admin/leads-table";
+
+export const dynamic = "force-dynamic";
 import { mockLeads } from "@/lib/mock-leads";
 import { isDbConnected } from "@/lib/db";
 import { Download } from "lucide-react";

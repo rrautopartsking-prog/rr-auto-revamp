@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import { LeadDetailView } from "@/components/admin/lead-detail-view";
+
+export const dynamic = "force-dynamic";
 import { mockLeads, mockLeadNotes } from "@/lib/mock-leads";
 import { isDbConnected } from "@/lib/db";
 

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+
+export const dynamic = "force-dynamic";
 import { mockBlogPosts } from "@/lib/mock-data";
 import { isDbConnected } from "@/lib/db";
 import { formatDate } from "@/lib/utils";

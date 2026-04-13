@@ -1,4 +1,6 @@
 import { AdminProductsTable } from "@/components/admin/products-table";
+
+export const dynamic = "force-dynamic";
 import { mockProducts, mockCategories } from "@/lib/mock-data";
 import { isDbConnected } from "@/lib/db";
 import Link from "next/link";

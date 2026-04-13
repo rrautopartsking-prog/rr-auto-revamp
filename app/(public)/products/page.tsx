@@ -1,5 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+
+export const dynamic = "force-dynamic";
 import { ProductsGrid } from "@/components/products/products-grid";
 import { ProductFilters } from "@/components/products/product-filters";
 import { ProductsSkeleton } from "@/components/products/products-skeleton";

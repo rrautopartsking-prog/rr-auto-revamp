@@ -1,4 +1,6 @@
 import { SettingsForm } from "@/components/admin/settings-form";
+
+export const dynamic = "force-dynamic";
 import { isDbConnected } from "@/lib/db";
 
 const defaultSettings: Record<string, string> = {

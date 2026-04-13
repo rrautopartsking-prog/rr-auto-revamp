@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Plus } from "lucide-react";
+
+export const dynamic = "force-dynamic";
 import { mockBlogPosts } from "@/lib/mock-data";
 import { isDbConnected } from "@/lib/db";
 import { formatDate } from "@/lib/utils";

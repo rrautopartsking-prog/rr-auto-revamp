@@ -1,4 +1,6 @@
 import { ReviewsManager } from "@/components/admin/reviews-manager";
+
+export const dynamic = "force-dynamic";
 import { isDbConnected } from "@/lib/db";
 
 const mockReviews = [

@@ -1,5 +1,7 @@
 import { HeroSection } from "@/components/home/hero-section";
 import { SmartSearch } from "@/components/home/smart-search";
+
+export const dynamic = "force-dynamic";
 import { CategoryShowcase } from "@/components/home/category-showcase";
 import { FeaturedProducts } from "@/components/home/featured-products";
 import { TrustIndicators } from "@/components/home/trust-indicators";

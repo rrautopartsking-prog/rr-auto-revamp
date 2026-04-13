@@ -1,4 +1,6 @@
 import { DashboardStats } from "@/components/admin/dashboard-stats";
+
+export const dynamic = "force-dynamic";
 import { LeadsChart } from "@/components/admin/leads-chart";
 import { RecentLeads } from "@/components/admin/recent-leads";
 import { TopBrands } from "@/components/admin/top-brands";

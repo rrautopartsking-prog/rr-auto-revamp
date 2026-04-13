@@ -1,4 +1,6 @@
 import { ProductForm } from "@/components/admin/product-form";
+
+export const dynamic = "force-dynamic";
 import { mockCategories } from "@/lib/mock-data";
 import { isDbConnected } from "@/lib/db";
 
