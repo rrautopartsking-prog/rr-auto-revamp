@@ -25,23 +25,28 @@ async function getData(params: PageProps["searchParams"]) {
     return { products: filtered.slice((page - 1) * limit, page * limit), total: filtered.length, categories: mockCategories, page, limit };
   }
 
-  const { prisma } = await import("@/lib/prisma");
-  const where: Record<string, unknown> = {};
-  if (params.search) {
-    where.OR = [{ name: { contains: params.search, mode: "insensitive" } }, { sku: { contains: params.search, mode: "insensitive" } }];
-  }
-  if (params.status) where.status = params.status;
-  if (params.category) {
-    const cat = await prisma.category.findUnique({ where: { slug: params.category } });
-    if (cat) where.categoryId = cat.id;
-  }
+  try {
+    const { prisma } = await import("@/lib/prisma");
+    const where: Record<string, unknown> = {};
+    if (params.search) {
+      where.OR = [{ name: { contains: params.search, mode: "insensitive" } }, { sku: { contains: params.search, mode: "insensitive" } }];
+    }
+    if (params.status) where.status = params.status;
+    if (params.category) {
+      const cat = await prisma.category.findUnique({ where: { slug: params.category } });
+      if (cat) where.categoryId = cat.id;
+    }
 
-  const [products, total, categories] = await Promise.all([
-    prisma.product.findMany({ where, include: { category: true }, orderBy: { createdAt: "desc" }, skip: (page - 1) * limit, take: limit }),
-    prisma.product.count({ where }),
-    prisma.category.findMany({ where: { isActive: true }, orderBy: { sortOrder: "asc" } }),
-  ]);
-  return { products, total, categories, page, limit };
+    const [products, total, categories] = await Promise.all([
+      prisma.product.findMany({ where, include: { category: true }, orderBy: { createdAt: "desc" }, skip: (page - 1) * limit, take: limit }),
+      prisma.product.count({ where }),
+      prisma.category.findMany({ where: { isActive: true }, orderBy: { sortOrder: "asc" } }),
+    ]);
+    return { products, total, categories, page, limit };
+  } catch (error) {
+    console.error("DB error, falling back to mock:", error);
+    return { products: mockProducts.slice(0, limit), total: mockProducts.length, categories: mockCategories, page, limit };
+  }
 }
 
 export default async function AdminProductsPage({ searchParams }: PageProps) {

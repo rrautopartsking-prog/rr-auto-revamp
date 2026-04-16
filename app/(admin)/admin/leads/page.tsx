@@ -24,23 +24,28 @@ async function getLeads(params: PageProps["searchParams"]) {
     return { leads: filtered.slice((page - 1) * limit, page * limit), total: filtered.length, page, limit };
   }
 
-  const { prisma } = await import("@/lib/prisma");
-  const where: Record<string, unknown> = {};
-  if (params.status) where.status = params.status;
-  if (params.score) where.score = params.score;
-  if (params.search) {
-    where.OR = [
-      { name: { contains: params.search, mode: "insensitive" } },
-      { email: { contains: params.search, mode: "insensitive" } },
-      { phone: { contains: params.search, mode: "insensitive" } },
-    ];
-  }
+  try {
+    const { prisma } = await import("@/lib/prisma");
+    const where: Record<string, unknown> = {};
+    if (params.status) where.status = params.status;
+    if (params.score) where.score = params.score;
+    if (params.search) {
+      where.OR = [
+        { name: { contains: params.search, mode: "insensitive" } },
+        { email: { contains: params.search, mode: "insensitive" } },
+        { phone: { contains: params.search, mode: "insensitive" } },
+      ];
+    }
 
-  const [leads, total] = await Promise.all([
-    prisma.lead.findMany({ where, orderBy: { createdAt: "desc" }, skip: (page - 1) * limit, take: limit, include: { product: { select: { name: true, slug: true } } } }),
-    prisma.lead.count({ where }),
-  ]);
-  return { leads, total, page, limit };
+    const [leads, total] = await Promise.all([
+      prisma.lead.findMany({ where, orderBy: { createdAt: "desc" }, skip: (page - 1) * limit, take: limit, include: { product: { select: { name: true, slug: true } } } }),
+      prisma.lead.count({ where }),
+    ]);
+    return { leads, total, page, limit };
+  } catch (error) {
+    console.error("DB error, falling back to mock:", error);
+    return { leads: mockLeads.slice(0, limit), total: mockLeads.length, page, limit };
+  }
 }
 
 export default async function AdminLeadsPage({ searchParams }: PageProps) {

@@ -21,22 +21,29 @@ async function getHomeData() {
     return {
       categories: mockCategories,
       featuredProducts: mockProducts.filter((p) => p.isFeatured),
+      reviews: [],
     };
   }
   const { prisma } = await import("@/lib/prisma");
-  const [categories, featuredProducts] = await Promise.all([
+  const [categories, featuredProducts, reviews] = await Promise.all([
     prisma.category.findMany({ where: { isActive: true }, orderBy: { sortOrder: "asc" }, take: 6 }),
     prisma.product.findMany({
       where: { isFeatured: true, isActive: true },
       include: { category: true },
       take: 6,
     }),
+    prisma.review.findMany({
+      where: { status: "APPROVED" },
+      orderBy: { createdAt: "desc" },
+      take: 6,
+      select: { id: true, rating: true, title: true, content: true, authorName: true, authorEmail: true },
+    }),
   ]);
-  return { categories, featuredProducts };
+  return { categories, featuredProducts, reviews };
 }
 
 export default async function HomePage() {
-  const { categories, featuredProducts } = await getHomeData();
+  const { categories, featuredProducts, reviews } = await getHomeData();
   return (
     <>
       <HeroSection />
@@ -44,7 +51,7 @@ export default async function HomePage() {
       <CategoryShowcase categories={categories} />
       <FeaturedProducts products={featuredProducts} />
       <TrustIndicators />
-      <TestimonialsSection />
+      <TestimonialsSection reviews={reviews} />
       <CTASection />
     </>
   );

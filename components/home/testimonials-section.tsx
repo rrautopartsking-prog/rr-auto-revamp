@@ -3,28 +3,25 @@
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 
-const testimonials = [
-  {
-    name: "Ahmed Al-Rashidi",
-    role: "Garage Owner, Dubai",
-    content: "RR Auto Revamp has been our go-to supplier for over 3 years. The quality is unmatched and delivery is always on time.",
-    rating: 5,
-  },
-  {
-    name: "Mohammed Al-Farsi",
-    role: "Porsche Enthusiast, Abu Dhabi",
-    content: "Found a rare part for my 911 Turbo that no one else could source. Incredible network and professional service.",
-    rating: 5,
-  },
-  {
-    name: "Khalid Al-Mansouri",
-    role: "Fleet Manager, Riyadh",
-    content: "Managing a fleet of 50+ vehicles, RR Auto Revamp handles all our bulk orders efficiently. Highly recommended.",
-    rating: 5,
-  },
-];
+interface Review {
+  id: string;
+  rating: number;
+  title?: string | null;
+  content: string;
+  authorName: string;
+  authorEmail: string;
+}
 
-export function TestimonialsSection() {
+interface Props {
+  reviews: Review[];
+}
+
+export function TestimonialsSection({ reviews }: Props) {
+  // Show max 6 reviews
+  const displayReviews = reviews.slice(0, 6);
+
+  if (displayReviews.length === 0) return null;
+
   return (
     <section className="py-20 bg-carbon-900">
       <div className="container mx-auto px-4">
@@ -38,10 +35,10 @@ export function TestimonialsSection() {
           <h2 className="section-title text-white mt-2">What Our Clients Say</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {displayReviews.map((review, i) => (
             <motion.div
-              key={t.name}
+              key={review.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -50,14 +47,17 @@ export function TestimonialsSection() {
             >
               <Quote size={32} className="text-gold/20 absolute top-4 right-4" />
               <div className="flex gap-1 mb-4">
-                {Array.from({ length: t.rating }).map((_, j) => (
+                {Array.from({ length: review.rating }).map((_, j) => (
                   <Star key={j} size={14} className="text-gold fill-gold" />
                 ))}
               </div>
-              <p className="text-carbon-300 text-sm leading-relaxed mb-6">&ldquo;{t.content}&rdquo;</p>
+              {review.title && (
+                <h4 className="font-semibold text-white text-sm mb-2">{review.title}</h4>
+              )}
+              <p className="text-carbon-300 text-sm leading-relaxed mb-6">&ldquo;{review.content}&rdquo;</p>
               <div>
-                <div className="font-display font-semibold text-white text-sm">{t.name}</div>
-                <div className="text-carbon-500 text-xs mt-0.5">{t.role}</div>
+                <div className="font-display font-semibold text-white text-sm">{review.authorName}</div>
+                <div className="text-carbon-500 text-xs mt-0.5">{review.authorEmail}</div>
               </div>
             </motion.div>
           ))}
