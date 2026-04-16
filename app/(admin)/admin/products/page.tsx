@@ -49,12 +49,12 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h1 className="font-display text-2xl font-bold text-white">Products</h1>
+          <h1 className="font-display text-xl lg:text-2xl font-bold text-white">Products</h1>
           <p className="text-carbon-400 text-sm mt-1">{total} products</p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-2 flex-wrap">
           <Link href="/admin/products/bulk-upload" className="btn-ghost-gold text-sm py-2">Bulk Upload</Link>
           <Link href="/admin/products/new" className="btn-gold text-sm py-2 flex items-center gap-2">
             <Plus size={14} /> Add Product

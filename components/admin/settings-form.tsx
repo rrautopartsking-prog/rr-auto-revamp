@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2, Save } from "lucide-react";
 import toast from "react-hot-toast";
@@ -11,10 +11,16 @@ interface Props {
 
 export function SettingsForm({ settings }: Props) {
   const router = useRouter();
-  const [values, setValues] = useState(settings);
   const [isLoading, setIsLoading] = useState(false);
+  // Use refs so inputs are uncontrolled — no re-render on every keystroke
+  const refs = useRef<Record<string, HTMLInputElement | null>>({});
 
   const handleSave = async () => {
+    const values: Record<string, string> = {};
+    Object.keys(settings).forEach((key) => {
+      values[key] = refs.current[key]?.value ?? settings[key] ?? "";
+    });
+
     setIsLoading(true);
     try {
       const res = await fetch("/api/settings", {
@@ -32,13 +38,15 @@ export function SettingsForm({ settings }: Props) {
     }
   };
 
-  const Field = ({ label, settingKey, type = "text", placeholder }: { label: string; settingKey: string; type?: string; placeholder?: string }) => (
+  const Field = ({ label, settingKey, type = "text", placeholder }: {
+    label: string; settingKey: string; type?: string; placeholder?: string;
+  }) => (
     <div>
       <label className="text-xs text-carbon-400 mb-1 block">{label}</label>
       <input
         type={type}
-        value={values[settingKey] || ""}
-        onChange={(e) => setValues({ ...values, [settingKey]: e.target.value })}
+        defaultValue={settings[settingKey] || ""}
+        ref={(el) => { refs.current[settingKey] = el; }}
         placeholder={placeholder}
         className="input-premium"
       />
@@ -55,10 +63,10 @@ export function SettingsForm({ settings }: Props) {
 
       <div className="glass rounded-lg p-5 space-y-4">
         <h3 className="font-display font-semibold text-white">Contact</h3>
-        <Field label="Phone" settingKey="contact_phone" placeholder="+971 XX XXX XXXX" />
+        <Field label="Phone" settingKey="contact_phone" placeholder="+91 XXXXX XXXXX" />
         <Field label="Email" settingKey="contact_email" type="email" />
         <Field label="Address" settingKey="contact_address" />
-        <Field label="WhatsApp Number" settingKey="whatsapp_number" placeholder="+971XXXXXXXXX" />
+        <Field label="WhatsApp Number" settingKey="whatsapp_number" placeholder="+91XXXXXXXXXX" />
       </div>
 
       <div className="glass rounded-lg p-5 space-y-4">

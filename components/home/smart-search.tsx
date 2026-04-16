@@ -78,47 +78,20 @@ export function SmartSearch() {
             <span className="text-carbon-500 text-sm ml-2">— Select your vehicle details</span>
           </div>
 
-          <div className="flex flex-wrap gap-3 items-end">
-            <SelectField
-              label="Brand"
-              value={filters.brand}
-              onChange={(v) => setFilters({ ...filters, brand: v, model: "" })}
-              options={CAR_BRANDS}
-            />
-            <SelectField
-              label="Model"
-              value={filters.model}
-              onChange={(v) => setFilters({ ...filters, model: v })}
-              options={models}
-              disabled={!filters.brand}
-            />
-            <SelectField
-              label="Year"
-              value={filters.year}
-              onChange={(v) => setFilters({ ...filters, year: v })}
-              options={years.map(String)}
-            />
-            <SelectField
-              label="Fuel Type"
-              value={filters.fuelType}
-              onChange={(v) => setFilters({ ...filters, fuelType: v })}
-              options={FUEL_TYPES}
-            />
-            <SelectField
-              label="Country Spec"
-              value={filters.countrySpec}
-              onChange={(v) => setFilters({ ...filters, countrySpec: v })}
-              options={COUNTRY_SPECS}
-            />
-
-            <motion.button
-              onClick={handleSearch}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="btn-gold flex items-center gap-2 whitespace-nowrap"
-            >
-              <Search size={16} />
-              Search Parts
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-wrap gap-3 items-end">
+            <SelectField label="Brand" value={filters.brand}
+              onChange={(v) => setFilters({ ...filters, brand: v, model: "" })} options={CAR_BRANDS} />
+            <SelectField label="Model" value={filters.model}
+              onChange={(v) => setFilters({ ...filters, model: v })} options={models} disabled={!filters.brand} />
+            <SelectField label="Year" value={filters.year}
+              onChange={(v) => setFilters({ ...filters, year: v })} options={years.map(String)} />
+            <SelectField label="Fuel Type" value={filters.fuelType}
+              onChange={(v) => setFilters({ ...filters, fuelType: v })} options={FUEL_TYPES} />
+            <SelectField label="Country Spec" value={filters.countrySpec}
+              onChange={(v) => setFilters({ ...filters, countrySpec: v })} options={COUNTRY_SPECS} />
+            <motion.button onClick={handleSearch} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+              className="btn-gold flex items-center justify-center gap-2 col-span-2 sm:col-span-3 lg:col-span-1 whitespace-nowrap">
+              <Search size={16} /> Search Parts
             </motion.button>
           </div>
 

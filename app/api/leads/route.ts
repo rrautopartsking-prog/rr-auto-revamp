@@ -106,6 +106,16 @@ export async function GET(req: NextRequest) {
   const where: Record<string, unknown> = {};
   if (status) where.status = status;
   if (score) where.score = score;
+  const dateRange = searchParams.get("dateRange");
+  if (dateRange) {
+    const now = new Date();
+    const from = dateRange === "today"
+      ? new Date(now.getFullYear(), now.getMonth(), now.getDate())
+      : dateRange === "week"
+      ? new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)
+      : new Date(now.getFullYear(), now.getMonth(), 1);
+    where.createdAt = { gte: from };
+  }
   if (search) {
     where.OR = [
       { name: { contains: search, mode: "insensitive" } },

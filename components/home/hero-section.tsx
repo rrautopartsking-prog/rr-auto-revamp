@@ -54,7 +54,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-none tracking-tight"
+          className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-none tracking-tight"
         >
           PRECISION.
           <br />

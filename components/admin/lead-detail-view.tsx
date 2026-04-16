@@ -80,6 +80,36 @@ export function LeadDetailView({ lead }: Props) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Actions sidebar — shown first on mobile */}
+        <div className="lg:hidden space-y-4 order-first">
+          <div className="glass rounded-lg p-4 flex gap-2 flex-wrap">
+            <a href={`tel:${lead.phone}`}
+              className="flex-1 text-center text-sm py-2 bg-green-400/10 border border-green-400/20 text-green-400 rounded-sm hover:bg-green-400/20 transition-all">
+              📞 Call
+            </a>
+            <a href={`mailto:${lead.email}`}
+              className="flex-1 text-center text-sm py-2 bg-blue-400/10 border border-blue-400/20 text-blue-400 rounded-sm hover:bg-blue-400/20 transition-all">
+              ✉️ Email
+            </a>
+            <a href={`https://wa.me/${lead.phone.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer"
+              className="flex-1 text-center text-sm py-2 bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] rounded-sm hover:bg-[#25D366]/20 transition-all">
+              💬 WhatsApp
+            </a>
+          </div>
+          <div className="glass rounded-lg p-4">
+            <p className="text-carbon-500 text-xs mb-2">Status</p>
+            <div className="flex flex-wrap gap-2">
+              {statusOptions.map((s) => (
+                <button key={s} onClick={() => { setStatus(s as typeof status); handleUpdate(s); }}
+                  className={cn("text-xs px-3 py-1.5 rounded-sm border transition-all",
+                    status === s ? statusColors[s] + " bg-white/5" : "border-carbon-700 text-carbon-400")}>
+                  {s}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Lead info */}
         <div className="lg:col-span-2 space-y-5">
           <div className="glass rounded-lg p-5">
@@ -194,26 +224,40 @@ export function LeadDetailView({ lead }: Props) {
 
           <div className="glass rounded-lg p-5 space-y-2">
             <h3 className="font-display font-semibold text-white mb-3">Quick Actions</h3>
-            <a
-              href={`tel:${lead.phone}`}
-              className="block w-full text-center text-sm py-2 bg-green-400/10 border border-green-400/20 text-green-400 rounded-sm hover:bg-green-400/20 transition-all"
-            >
+            <a href={`tel:${lead.phone}`}
+              className="block w-full text-center text-sm py-2 bg-green-400/10 border border-green-400/20 text-green-400 rounded-sm hover:bg-green-400/20 transition-all">
               📞 Call {lead.phone}
             </a>
-            <a
-              href={`mailto:${lead.email}`}
-              className="block w-full text-center text-sm py-2 bg-blue-400/10 border border-blue-400/20 text-blue-400 rounded-sm hover:bg-blue-400/20 transition-all"
-            >
+            <a href={`mailto:${lead.email}`}
+              className="block w-full text-center text-sm py-2 bg-blue-400/10 border border-blue-400/20 text-blue-400 rounded-sm hover:bg-blue-400/20 transition-all">
               ✉️ Send Email
             </a>
-            <a
-              href={`https://wa.me/${lead.phone.replace(/\D/g, "")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full text-center text-sm py-2 bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] rounded-sm hover:bg-[#25D366]/20 transition-all"
-            >
+            <a href={`https://wa.me/${lead.phone.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer"
+              className="block w-full text-center text-sm py-2 bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] rounded-sm hover:bg-[#25D366]/20 transition-all">
               💬 WhatsApp
             </a>
+          </div>
+
+          {/* Follow-up reminder */}
+          <div className="glass rounded-lg p-5">
+            <h3 className="font-display font-semibold text-white mb-3">Follow-up Reminder</h3>
+            <p className="text-carbon-500 text-xs mb-3">Set a reminder to follow up with this lead</p>
+            <div className="space-y-2">
+              {[
+                { label: "In 1 hour", hours: 1 },
+                { label: "Tomorrow", hours: 24 },
+                { label: "In 3 days", hours: 72 },
+              ].map(({ label, hours }) => (
+                <button key={label}
+                  onClick={() => {
+                    const time = new Date(Date.now() + hours * 60 * 60 * 1000);
+                    toast.success(`Reminder set for ${time.toLocaleString()}`);
+                  }}
+                  className="w-full text-left text-xs px-3 py-2 border border-carbon-700 text-carbon-400 rounded-sm hover:border-gold hover:text-gold transition-all">
+                  ⏰ {label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>

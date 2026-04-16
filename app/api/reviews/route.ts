@@ -28,10 +28,26 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  const body = await req.json();
+
+  // Admin-created reviews: auth required, auto-approved, no rate limit
+  const user = await getAuthUser(req);
+  if (body.isAdminCreated) {
+    if (!user) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
+    const parsed = reviewSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ success: false, error: parsed.error.errors[0].message }, { status: 400 });
+    }
+    const review = await prisma.review.create({
+      data: { ...parsed.data, status: "APPROVED", isVerified: true },
+    });
+    return NextResponse.json<ApiResponse>({ success: true, data: review, message: "Review added" }, { status: 201 });
+  }
+
+  // Public reviews: rate limited, pending approval
   const limited = rateLimit(req, 3, 60_000);
   if (limited) return limited;
 
-  const body = await req.json();
   const parsed = reviewSchema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json({ success: false, error: parsed.error.errors[0].message }, { status: 400 });
