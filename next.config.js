@@ -15,7 +15,7 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   experimental: {
-    serverComponentsExternalPackages: ["@prisma/client", "bcryptjs"],
+    serverComponentsExternalPackages: ["@prisma/client", "bcryptjs", "web-push"],
   },
   async headers() {
     return [
