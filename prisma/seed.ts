@@ -8,10 +8,10 @@ async function main() {
 
   // Admin users
   const superAdmin = await prisma.user.upsert({
-    where: { email: "admin@rrautorevamp.com" },
+    where: { email: "rrautopartsking@gmail.com" },
     update: {},
     create: {
-      email: "admin@rrautorevamp.com",
+      email: "rrautopartsking@gmail.com",
       name: "Super Admin",
       passwordHash: await bcrypt.hash("Admin@123!", 12),
       role: Role.SUPER_ADMIN,
@@ -144,7 +144,7 @@ async function main() {
     { key: "site_name", value: "RR Auto Revamp" },
     { key: "site_tagline", value: "Premium Automotive Parts" },
     { key: "contact_phone", value: "+971 XX XXX XXXX" },
-    { key: "contact_email", value: "info@rrautorevamp.com" },
+    { key: "contact_email", value: "rrautopartsking@gmail.com" },
     { key: "contact_address", value: "Dubai, UAE" },
     { key: "whatsapp_number", value: "+971XXXXXXXXX" },
     { key: "google_analytics_id", value: "" },

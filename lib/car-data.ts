@@ -31,7 +31,7 @@ export const CAR_MODELS: Record<string, string[]> = {
 
 export const FUEL_TYPES = ["Petrol", "Diesel", "Hybrid", "Electric", "Plug-in Hybrid"];
 
-export const COUNTRY_SPECS = ["GCC", "Euro", "US", "Japan", "Canada", "Australia", "UK", "Middle East"];
+export const COUNTRY_SPECS = ["GCC", "Euro", "US", "Japan", "Canada", "Australia", "UK", "Middle East", "India"];
 
 export const VARIANTS: Record<string, string[]> = {
   "BMW": ["Base", "xDrive", "sDrive", "M Sport", "M Package", "Competition"],

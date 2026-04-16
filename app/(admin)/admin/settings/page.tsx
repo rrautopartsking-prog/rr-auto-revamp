@@ -7,7 +7,7 @@ const defaultSettings: Record<string, string> = {
   site_name: "RR Auto Revamp",
   site_tagline: "Premium Automotive Parts",
   contact_phone: "+91 84481 76091",
-  contact_email: "info@rrautorevamp.com",
+  contact_email: "rrautopartsking@gmail.com",
   contact_address: "Delhi, India",
   whatsapp_number: "+918448176091",
   google_analytics_id: "",

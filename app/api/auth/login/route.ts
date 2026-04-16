@@ -10,7 +10,7 @@ const hasDB = !!process.env.DATABASE_URL &&
 // Fallback admin when no DB is configured
 const MOCK_ADMIN = {
   id: "mock-admin-001",
-  email: "admin@rrautorevamp.com",
+  email: "rrautopartsking@gmail.com",
   name: "Super Admin",
   role: "SUPER_ADMIN",
   password: "Admin@123!",

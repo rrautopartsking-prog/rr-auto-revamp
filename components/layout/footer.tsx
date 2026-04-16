@@ -92,8 +92,8 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3 text-sm">
                 <Mail size={16} className="text-gold shrink-0" />
-                <a href="mailto:info@rrautorevamp.com" className="text-carbon-400 hover:text-gold transition-colors">
-                  info@rrautorevamp.com
+                <a href="mailto:rrautopartsking@gmail.com" className="text-carbon-400 hover:text-gold transition-colors">
+                  rrautopartsking@gmail.com
                 </a>
               </li>
             </ul>

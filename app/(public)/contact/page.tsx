@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const contactInfo = [
   { icon: Phone, label: "Phone", value: "+91 84481 76091", href: "tel:+918448176091" },
-  { icon: Mail, label: "Email", value: "info@rrautorevamp.com", href: "mailto:info@rrautorevamp.com" },
+  { icon: Mail, label: "Email", value: "rrautopartsking@gmail.com", href: "mailto:rrautopartsking@gmail.com" },
   { icon: MapPin, label: "Location", value: "Delhi, India", href: "#" },
   { icon: Clock, label: "Hours", value: "Mon–Sat: 9AM – 7PM IST", href: "#" },
 ];
