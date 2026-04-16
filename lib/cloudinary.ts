@@ -12,6 +12,9 @@ export async function uploadImage(
   file: string,
   folder: string = "rr-auto-revamp"
 ): Promise<{ url: string; publicId: string }> {
+  if (!process.env.CLOUDINARY_API_KEY) {
+    throw new Error("Cloudinary is not configured. Set CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, and NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME.");
+  }
   const result = await cloudinary.uploader.upload(file, {
     folder,
     transformation: [{ quality: "auto", fetch_format: "auto" }],

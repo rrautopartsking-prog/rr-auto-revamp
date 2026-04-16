@@ -84,6 +84,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
+  try {
   const { searchParams } = req.nextUrl;
   const page = Number(searchParams.get("page") || 1);
   const limit = Number(searchParams.get("limit") || 20);
@@ -118,4 +119,8 @@ export async function GET(req: NextRequest) {
     data: leads,
     meta: { total, page, limit, totalPages: Math.ceil(total / limit) },
   });
+  } catch (error) {
+    console.error("Leads fetch error:", error);
+    return NextResponse.json<ApiResponse>({ success: false, error: "Failed to fetch leads" }, { status: 500 });
+  }
 }

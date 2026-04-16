@@ -4,11 +4,19 @@ import { prisma } from "@/lib/prisma";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://rrautorevamp.com";
 
-  const [products, blogPosts, categories] = await Promise.all([
-    prisma.product.findMany({ where: { isActive: true }, select: { slug: true, updatedAt: true } }),
-    prisma.blogPost.findMany({ where: { isPublished: true }, select: { slug: true, updatedAt: true } }),
-    prisma.category.findMany({ where: { isActive: true }, select: { slug: true } }),
-  ]);
+  let products: { slug: string; updatedAt: Date }[] = [];
+  let blogPosts: { slug: string; updatedAt: Date }[] = [];
+  let categories: { slug: string }[] = [];
+
+  try {
+    [products, blogPosts, categories] = await Promise.all([
+      prisma.product.findMany({ where: { isActive: true }, select: { slug: true, updatedAt: true } }),
+      prisma.blogPost.findMany({ where: { isPublished: true }, select: { slug: true, updatedAt: true } }),
+      prisma.category.findMany({ where: { isActive: true }, select: { slug: true } }),
+    ]);
+  } catch (e) {
+    console.error("Sitemap DB error:", e);
+  }
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: "daily", priority: 1 },

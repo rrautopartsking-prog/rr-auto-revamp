@@ -7,6 +7,7 @@ export async function GET(req: NextRequest) {
   const user = await getAuthUser(req);
   if (!user) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
 
+  try {
   const now = new Date();
   const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const startOfWeek = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
@@ -59,4 +60,8 @@ export async function GET(req: NextRequest) {
   };
 
   return NextResponse.json({ success: true, data: stats });
+  } catch (error) {
+    console.error("Dashboard stats error:", error);
+    return NextResponse.json({ success: false, error: "Failed to fetch stats" }, { status: 500 });
+  }
 }

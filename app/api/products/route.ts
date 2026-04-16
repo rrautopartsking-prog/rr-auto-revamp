@@ -6,6 +6,7 @@ import { slugify } from "@/lib/utils";
 import type { ApiResponse } from "@/types/api";
 
 export async function GET(req: NextRequest) {
+  try {
   const { searchParams } = req.nextUrl;
   const page = Number(searchParams.get("page") || 1);
   const limit = Number(searchParams.get("limit") || 12);
@@ -48,6 +49,10 @@ export async function GET(req: NextRequest) {
     data: products,
     meta: { total, page, limit, totalPages: Math.ceil(total / limit) },
   });
+  } catch (error) {
+    console.error("Products fetch error:", error);
+    return NextResponse.json<ApiResponse>({ success: false, error: "Failed to fetch products" }, { status: 500 });
+  }
 }
 
 export async function POST(req: NextRequest) {
