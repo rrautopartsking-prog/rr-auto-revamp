@@ -84,7 +84,7 @@ export function InquiryForm({ productId, productName, prefillBrand, prefillModel
 
       setIsSubmitted(true);
       localStorage.removeItem(DRAFT_KEY);
-      toast.success("Inquiry submitted successfully!");
+      toast.success("Inquiry submitted! Check your email for confirmation.", { duration: 5000 });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Something went wrong");
     } finally {
@@ -102,12 +102,27 @@ export function InquiryForm({ productId, productName, prefillBrand, prefillModel
         <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
           <CheckCircle size={32} className="text-gold" />
         </div>
-        <h3 className="font-display text-2xl font-bold text-white mb-2">Inquiry Received</h3>
-        <p className="text-carbon-400 mb-6">
-          Our team will contact you within 24 hours. Check your email for confirmation.
+        <h3 className="font-display text-2xl font-bold text-white mb-2">Inquiry Received! 🎉</h3>
+        <p className="text-carbon-300 text-base mb-2">
+          Hi, thank you for reaching out to RR Auto Revamp.
         </p>
+        <p className="text-carbon-400 text-sm mb-6 leading-relaxed">
+          We've received your inquiry and our team will get back to you within <span className="text-gold font-semibold">2–4 hours</span>.<br />
+          A confirmation has been sent to your email.
+        </p>
+        <div className="bg-carbon-900 border border-carbon-700 rounded-lg p-4 mb-6 text-left">
+          <p className="text-carbon-400 text-xs mb-1">Need a faster response?</p>
+          <a
+            href="https://wa.me/918448176091"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-gold transition-colors"
+          >
+            <span className="text-green-400">💬</span> Chat with us on WhatsApp
+          </a>
+        </div>
         <button onClick={() => { setIsSubmitted(false); reset(); }} className="btn-ghost-gold text-sm">
-          Submit Another
+          Submit Another Inquiry
         </button>
       </motion.div>
     );
