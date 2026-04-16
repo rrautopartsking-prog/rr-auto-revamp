@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
     });
 
     // Fire notifications in background — never block the response
-    setImmediate(async () => {
+    Promise.resolve().then(async () => {
       try {
         const { sendLeadNotificationEmail, sendLeadConfirmationEmail } = await import("@/lib/email");
         await Promise.allSettled([
@@ -66,6 +66,17 @@ export async function POST(req: NextRequest) {
         });
       } catch (e) {
         console.error("WhatsApp error:", e);
+      }
+
+      try {
+        const { sendPushToAll } = await import("@/lib/push");
+        await sendPushToAll({
+          title: `🔥 New Lead: ${data.name}`,
+          body: `${data.brand || "General"} ${data.model || ""} — ${data.partName || data.type.replace("_", " ")}`,
+          url: "/admin/leads",
+        });
+      } catch (e) {
+        console.error("Push error:", e);
       }
     });
 

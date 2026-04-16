@@ -18,7 +18,7 @@ interface LeadEmailData {
 
 export async function sendLeadNotificationEmail(lead: LeadEmailData): Promise<void> {
   if (!resend) return;
-  const adminEmail = process.env.ADMIN_EMAIL || "admin@rrautorevamp.com";
+  const adminEmail = process.env.ADMIN_EMAIL || "rrautopartsking@gmail.com";
   try {
     await resend.emails.send({
       from: process.env.EMAIL_FROM || "noreply@rrautorevamp.com",

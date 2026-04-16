@@ -1,6 +1,7 @@
 "use client";
 
-import { Bell, Search } from "lucide-react";
+import { Search } from "lucide-react";
+import { PushNotificationToggle } from "@/components/admin/push-notifications";
 
 export function AdminHeader() {
   return (
@@ -15,10 +16,7 @@ export function AdminHeader() {
       </div>
 
       <div className="flex items-center gap-3">
-        <button className="relative w-9 h-9 glass rounded-sm flex items-center justify-center text-carbon-400 hover:text-white transition-colors">
-          <Bell size={16} />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-gold rounded-full" />
-        </button>
+        <PushNotificationToggle />
         <div className="w-8 h-8 bg-gold-gradient rounded-sm flex items-center justify-center">
           <span className="text-carbon-950 font-bold text-xs">A</span>
         </div>
