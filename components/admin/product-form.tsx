@@ -47,8 +47,15 @@ export function ProductForm({ categories, product }: Props) {
     if (!files?.length) return;
 
     setUploading(true);
+    const errors: string[] = [];
+
     try {
       for (const file of Array.from(files)) {
+        if (file.size > 15 * 1024 * 1024) {
+          errors.push(`${file.name}: too large (max 15MB)`);
+          continue;
+        }
+
         const formData = new FormData();
         formData.append("file", file);
         formData.append("folder", "products");
@@ -58,13 +65,22 @@ export function ProductForm({ categories, product }: Props) {
 
         if (data.success) {
           setImages((prev) => [...prev, data.data.url]);
+        } else {
+          errors.push(`${file.name}: ${data.error}`);
         }
       }
-      toast.success("Images uploaded");
+
+      if (errors.length > 0) {
+        toast.error(errors.join(", "));
+      } else {
+        toast.success(`${Array.from(files).length} image(s) uploaded`);
+      }
     } catch {
-      toast.error("Upload failed");
+      toast.error("Upload failed. Check your Cloudinary credentials.");
     } finally {
       setUploading(false);
+      // Reset input so same file can be re-uploaded
+      e.target.value = "";
     }
   };
 
