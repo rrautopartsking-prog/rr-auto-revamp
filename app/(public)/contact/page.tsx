@@ -1,20 +1,30 @@
 import type { Metadata } from "next";
 import { InquiryForm } from "@/components/forms/inquiry-form";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { getSettings } from "@/lib/settings";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Contact Us",
   description: "Get in touch with RR Auto Revamp for premium automotive parts inquiries.",
 };
 
-const contactInfo = [
-  { icon: Phone, label: "Phone", value: "+91 84481 76091", href: "tel:+918448176091" },
-  { icon: Mail, label: "Email", value: "rrautopartsking@gmail.com", href: "mailto:rrautopartsking@gmail.com" },
-  { icon: MapPin, label: "Location", value: "Delhi, India", href: "#" },
-  { icon: Clock, label: "Hours", value: "Mon–Sat: 9AM – 7PM IST", href: "#" },
-];
+export default async function ContactPage() {
+  const settings = await getSettings();
 
-export default function ContactPage() {
+  const phone = settings.contact_phone || "+91 84481 76091";
+  const email = settings.contact_email || "info@rrautorevamp.com";
+  const address = settings.contact_address || "Delhi, India";
+  const whatsapp = settings.whatsapp_number || "918448176091";
+
+  const contactInfo = [
+    { icon: Phone, label: "Phone", value: phone, href: `tel:${phone.replace(/\s/g, "")}` },
+    { icon: Mail, label: "Email", value: email, href: `mailto:${email}` },
+    { icon: MapPin, label: "Location", value: address, href: "#" },
+    { icon: Clock, label: "Hours", value: "Mon–Sat: 9AM – 7PM IST", href: "#" },
+  ];
+
   return (
     <div className="min-h-screen bg-carbon-950 pt-20">
       <div className="container mx-auto px-4 py-16">
@@ -30,11 +40,8 @@ export default function ContactPage() {
           {/* Contact info */}
           <div className="space-y-4">
             {contactInfo.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="flex items-start gap-4 glass rounded-lg p-4 hover:border-gold/30 transition-all group"
-              >
+              <a key={item.label} href={item.href}
+                className="flex items-start gap-4 glass rounded-lg p-4 hover:border-gold/30 transition-all group">
                 <div className="w-10 h-10 bg-gold/10 rounded-sm flex items-center justify-center shrink-0 group-hover:bg-gold/20 transition-colors">
                   <item.icon size={18} className="text-gold" />
                 </div>
@@ -47,7 +54,7 @@ export default function ContactPage() {
 
             {/* WhatsApp CTA */}
             <a
-              href={`https://wa.me/918448176091`}
+              href={`https://wa.me/${whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-4 bg-[#25D366]/10 border border-[#25D366]/30 rounded-lg hover:bg-[#25D366]/20 transition-all"

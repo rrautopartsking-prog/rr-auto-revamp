@@ -3,8 +3,11 @@
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 
-export function WhatsAppButton() {
-  const whatsappNumber = "918448176091";
+interface Props {
+  whatsappNumber?: string;
+}
+
+export function WhatsAppButton({ whatsappNumber = "918448176091" }: Props) {
   const message = encodeURIComponent("Hello! I'm interested in automotive parts from RR Auto Revamp.");
 
   return (

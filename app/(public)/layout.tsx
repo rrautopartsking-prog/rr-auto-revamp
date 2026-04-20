@@ -1,20 +1,18 @@
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
-import { InquiryNudge } from "@/components/ui/inquiry-nudge";
-import { ExitIntent } from "@/components/ui/exit-intent";
-import { BackToTop } from "@/components/ui/back-to-top";
+import { getSettings } from "@/lib/settings";
 
-export default function PublicLayout({ children }: { children: React.ReactNode }) {
+export default async function PublicLayout({ children }: { children: React.ReactNode }) {
+  const settings = await getSettings();
+  const whatsappNumber = settings.whatsapp_number || "918448176091";
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1">{children}</main>
       <Footer />
-      <WhatsAppButton />
-      <InquiryNudge />
-      <ExitIntent />
-      <BackToTop />
+      <WhatsAppButton whatsappNumber={whatsappNumber} />
     </div>
   );
 }
