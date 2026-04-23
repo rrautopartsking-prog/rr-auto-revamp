@@ -133,6 +133,27 @@ export function SettingsForm({ settings: initialSettings }: Props) {
         />
       </div>
 
+      {/* Social Media */}
+      <div className="glass rounded-lg p-5 space-y-4">
+        <h3 className="font-display font-semibold text-white">Social Media</h3>
+        <p className="text-carbon-500 text-xs">These links appear in the website footer.</p>
+        <Field
+          label="Instagram URL"
+          settingKey="social_instagram"
+          placeholder="https://www.instagram.com/rr_auto_revamp/"
+        />
+        <Field
+          label="Facebook URL"
+          settingKey="social_facebook"
+          placeholder="https://www.facebook.com/..."
+        />
+        <Field
+          label="YouTube URL"
+          settingKey="social_youtube"
+          placeholder="https://www.youtube.com/@r_renterprises."
+        />
+      </div>
+
       <button
         onClick={handleSave}
         disabled={isLoading}

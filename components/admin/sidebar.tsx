@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Users, Package, Tag, FileText,
-  Star, Settings, LogOut, ChevronRight, Menu, X,
+  Star, Settings, LogOut, ChevronRight, Menu, X, Info,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -16,6 +16,7 @@ const navItems = [
   { label: "Categories", href: "/admin/categories", icon: Tag },
   { label: "Blog", href: "/admin/blog", icon: FileText },
   { label: "Reviews", href: "/admin/reviews", icon: Star },
+  { label: "About Page", href: "/admin/about", icon: Info },
   { label: "Settings", href: "/admin/settings", icon: Settings },
 ];
 

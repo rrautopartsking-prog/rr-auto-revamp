@@ -24,6 +24,9 @@ export async function Footer() {
   const email = settings.contact_email || "info@rrautorevamp.com";
   const address = settings.contact_address || "Delhi, India";
   const whatsapp = settings.whatsapp_number || "918448176091";
+  const instagram = settings.social_instagram || "https://www.instagram.com/rr_auto_revamp/";
+  const facebook = settings.social_facebook || "https://www.facebook.com/sharer.php?t=R%20R%20Auto%20Parts%20Dealer%20in%20Delhi%2C%20India%20%7C%20Partfinder%20India&u=https%3A%2F%2Fwww.partfinder.in%2Fshop%2Fr-r-auto-revamp-2963";
+  const youtube = settings.social_youtube || "https://www.youtube.com/@r_renterprises.";
 
   return (
     <footer className="bg-carbon-950 border-t border-white/5">
@@ -43,8 +46,15 @@ export async function Footer() {
               Premium automotive spare parts sourced globally. Trusted by enthusiasts and garages across India.
             </p>
             <div className="flex gap-3">
-              {[Instagram, Facebook, Youtube].map((Icon, i) => (
-                <a key={i} href="#"
+              {[
+                { Icon: Instagram, href: instagram, label: "Instagram" },
+                { Icon: Facebook, href: facebook, label: "Facebook" },
+                { Icon: Youtube, href: youtube, label: "YouTube" },
+              ].map(({ Icon, href, label }) => (
+                <a key={label} href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
                   className="w-9 h-9 glass rounded-sm flex items-center justify-center text-carbon-400 hover:text-gold hover:border-gold/30 transition-all duration-200">
                   <Icon size={16} />
                 </a>

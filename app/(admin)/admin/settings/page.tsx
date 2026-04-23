@@ -12,6 +12,9 @@ const defaultSettings: Record<string, string> = {
   whatsapp_number: "+918448176091",
   google_analytics_id: "",
   meta_pixel_id: "",
+  social_instagram: "https://www.instagram.com/rr_auto_revamp/",
+  social_facebook: "https://www.facebook.com/sharer.php?t=R%20R%20Auto%20Parts%20Dealer%20in%20Delhi%2C%20India%20%7C%20Partfinder%20India&u=https%3A%2F%2Fwww.partfinder.in%2Fshop%2Fr-r-auto-revamp-2963",
+  social_youtube: "https://www.youtube.com/@r_renterprises.",
 };
 
 async function getSettings() {
