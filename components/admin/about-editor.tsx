@@ -18,7 +18,7 @@ interface Props {
   initialData: AboutData;
 }
 
-// ─── Collapsible Section ──────────────────────────────────────────────────────
+// ─── Collapsible Section — defined outside to prevent remount on state change ──
 function Section({
   title,
   icon: Icon,
@@ -50,7 +50,7 @@ function Section({
   );
 }
 
-// ─── Field Components ─────────────────────────────────────────────────────────
+// ─── Field — defined outside to prevent remount on state change ───────────────
 function Field({
   label,
   value,

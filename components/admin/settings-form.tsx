@@ -9,6 +9,37 @@ interface Props {
   settings: Record<string, string>;
 }
 
+// ── Field is defined OUTSIDE the parent so it never remounts on state change ──
+function Field({
+  label,
+  value,
+  onChange,
+  type = "text",
+  placeholder,
+  hint,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  type?: string;
+  placeholder?: string;
+  hint?: string;
+}) {
+  return (
+    <div>
+      <label className="text-xs text-carbon-400 mb-1 block font-medium">{label}</label>
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="input-premium"
+      />
+      {hint && <p className="text-carbon-600 text-xs mt-1">{hint}</p>}
+    </div>
+  );
+}
+
 export function SettingsForm({ settings: initialSettings }: Props) {
   const router = useRouter();
   const [values, setValues] = useState(initialSettings);
@@ -44,39 +75,23 @@ export function SettingsForm({ settings: initialSettings }: Props) {
     setSaved(false);
   };
 
-  const Field = ({
-    label,
-    settingKey,
-    type = "text",
-    placeholder,
-    hint,
-  }: {
-    label: string;
-    settingKey: string;
-    type?: string;
-    placeholder?: string;
-    hint?: string;
-  }) => (
-    <div>
-      <label className="text-xs text-carbon-400 mb-1 block font-medium">{label}</label>
-      <input
-        type={type}
-        value={values[settingKey] || ""}
-        onChange={(e) => update(settingKey, e.target.value)}
-        placeholder={placeholder}
-        className="input-premium"
-      />
-      {hint && <p className="text-carbon-600 text-xs mt-1">{hint}</p>}
-    </div>
-  );
-
   return (
     <div className="space-y-5">
       {/* General */}
       <div className="glass rounded-lg p-5 space-y-4">
         <h3 className="font-display font-semibold text-white">General</h3>
-        <Field label="Site Name" settingKey="site_name" placeholder="RR Auto Revamp" />
-        <Field label="Tagline" settingKey="site_tagline" placeholder="Premium Automotive Parts" />
+        <Field
+          label="Site Name"
+          value={values.site_name || ""}
+          onChange={(v) => update("site_name", v)}
+          placeholder="RR Auto Revamp"
+        />
+        <Field
+          label="Tagline"
+          value={values.site_tagline || ""}
+          onChange={(v) => update("site_tagline", v)}
+          placeholder="Premium Automotive Parts"
+        />
       </div>
 
       {/* Contact */}
@@ -85,25 +100,29 @@ export function SettingsForm({ settings: initialSettings }: Props) {
         <p className="text-carbon-500 text-xs">These values appear on the website footer and contact page.</p>
         <Field
           label="Phone Number"
-          settingKey="contact_phone"
+          value={values.contact_phone || ""}
+          onChange={(v) => update("contact_phone", v)}
           placeholder="+91 84481 76091"
           hint="Displayed on contact page and footer"
         />
         <Field
           label="WhatsApp Number"
-          settingKey="whatsapp_number"
+          value={values.whatsapp_number || ""}
+          onChange={(v) => update("whatsapp_number", v)}
           placeholder="918448176091"
           hint="Without + or spaces — used for wa.me links"
         />
         <Field
           label="Email Address"
-          settingKey="contact_email"
+          value={values.contact_email || ""}
+          onChange={(v) => update("contact_email", v)}
           type="email"
           placeholder="info@rrautorevamp.com"
         />
         <Field
           label="Address"
-          settingKey="contact_address"
+          value={values.contact_address || ""}
+          onChange={(v) => update("contact_address", v)}
           placeholder="Delhi, India"
         />
       </div>
@@ -113,12 +132,14 @@ export function SettingsForm({ settings: initialSettings }: Props) {
         <h3 className="font-display font-semibold text-white">Analytics</h3>
         <Field
           label="Google Analytics ID"
-          settingKey="google_analytics_id"
+          value={values.google_analytics_id || ""}
+          onChange={(v) => update("google_analytics_id", v)}
           placeholder="G-XXXXXXXXXX"
         />
         <Field
           label="Meta Pixel ID"
-          settingKey="meta_pixel_id"
+          value={values.meta_pixel_id || ""}
+          onChange={(v) => update("meta_pixel_id", v)}
           placeholder="XXXXXXXXXXXXXXXX"
         />
       </div>
@@ -128,7 +149,8 @@ export function SettingsForm({ settings: initialSettings }: Props) {
         <h3 className="font-display font-semibold text-white">SEO</h3>
         <Field
           label="Meta Description"
-          settingKey="meta_description"
+          value={values.meta_description || ""}
+          onChange={(v) => update("meta_description", v)}
           placeholder="Premium automotive spare parts sourced globally..."
         />
       </div>
@@ -139,17 +161,20 @@ export function SettingsForm({ settings: initialSettings }: Props) {
         <p className="text-carbon-500 text-xs">These links appear in the website footer.</p>
         <Field
           label="Instagram URL"
-          settingKey="social_instagram"
+          value={values.social_instagram || ""}
+          onChange={(v) => update("social_instagram", v)}
           placeholder="https://www.instagram.com/rr_auto_revamp/"
         />
         <Field
           label="Facebook URL"
-          settingKey="social_facebook"
+          value={values.social_facebook || ""}
+          onChange={(v) => update("social_facebook", v)}
           placeholder="https://www.facebook.com/..."
         />
         <Field
           label="YouTube URL"
-          settingKey="social_youtube"
+          value={values.social_youtube || ""}
+          onChange={(v) => update("social_youtube", v)}
           placeholder="https://www.youtube.com/@r_renterprises."
         />
       </div>
