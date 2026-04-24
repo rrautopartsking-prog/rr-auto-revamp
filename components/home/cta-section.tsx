@@ -31,7 +31,7 @@ export function CTASection() {
               Submit Inquiry <ArrowRight size={18} />
             </Link>
             <a
-              href={`https://wa.me/rrautorevamp`}
+              href={`https://wa.me/919205876091`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] rounded-sm font-semibold hover:bg-[#25D366]/20 transition-all duration-300"

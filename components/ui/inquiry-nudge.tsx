@@ -121,7 +121,7 @@ export function InquiryNudge() {
                   Inquire Now
                 </Link>
                 <a
-                  href="https://wa.me/rrautorevamp"
+                  href="https://wa.me/919205876091"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={dismiss}

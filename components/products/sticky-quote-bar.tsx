@@ -9,7 +9,7 @@ interface Props {
   whatsappNumber?: string;
 }
 
-export function StickyQuoteBar({ productName, whatsappNumber = "rrautorevamp" }: Props) {
+export function StickyQuoteBar({ productName, whatsappNumber = "919205876091" }: Props) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {

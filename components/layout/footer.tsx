@@ -23,7 +23,7 @@ export async function Footer() {
   const phone = settings.contact_phone || "+91 84481 76091";
   const email = settings.contact_email || "info@rrautorevamp.com";
   const address = settings.contact_address || "Delhi, India";
-  const whatsapp = settings.whatsapp_number || "rrautorevamp";
+  const whatsapp = settings.whatsapp_number || "919205876091";
   const instagram = settings.social_instagram || "https://www.instagram.com/rr_auto_revamp/";
   const facebook = settings.social_facebook || "https://www.facebook.com/sharer.php?t=R%20R%20Auto%20Parts%20Dealer%20in%20Delhi%2C%20India%20%7C%20Partfinder%20India&u=https%3A%2F%2Fwww.partfinder.in%2Fshop%2Fr-r-auto-revamp-2963";
   const youtube = settings.social_youtube || "https://www.youtube.com/@r_renterprises.";
