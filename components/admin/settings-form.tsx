@@ -110,7 +110,7 @@ export function SettingsForm({ settings: initialSettings }: Props) {
           value={values.whatsapp_number || ""}
           onChange={(v) => update("whatsapp_number", v)}
           placeholder="918448176091"
-          hint="Without + or spaces — used for wa.me links"
+          hint="Digits only, with country code — e.g. 919205876091 (no +, no spaces)"
         />
         <Field
           label="Email Address"

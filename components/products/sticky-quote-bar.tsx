@@ -19,6 +19,7 @@ export function StickyQuoteBar({ productName, whatsappNumber = "919205876091" }:
   }, []);
 
   const waMsg = encodeURIComponent(`Hi, I'm interested in: ${productName}. Can you help me source it?`);
+  const cleanNumber = whatsappNumber.replace(/\D/g, "");
 
   return (
     <AnimatePresence>
@@ -36,7 +37,7 @@ export function StickyQuoteBar({ productName, whatsappNumber = "919205876091" }:
               <p className="text-carbon-400 text-xs">Interested in this part?</p>
             </div>
             <div className="flex items-center gap-2 shrink-0">
-              <a href={`https://wa.me/${whatsappNumber}?text=${waMsg}`}
+              <a href={`https://wa.me/${cleanNumber}?text=${waMsg}`}
                 target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-1.5 bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] text-xs font-semibold py-2 px-3 rounded-lg hover:bg-[#25D366]/20 transition-colors">
                 <MessageCircle size={13} /> WhatsApp

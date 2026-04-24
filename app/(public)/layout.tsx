@@ -5,7 +5,7 @@ import { getSettings } from "@/lib/settings";
 
 export default async function PublicLayout({ children }: { children: React.ReactNode }) {
   const settings = await getSettings();
-  const whatsappNumber = (settings.whatsapp_number || "919205876091").replace(/[\s+\-()]/g, "");
+  const whatsappNumber = (settings.whatsapp_number || "919205876091").replace(/\D/g, "");
 
   return (
     <div className="min-h-screen flex flex-col">

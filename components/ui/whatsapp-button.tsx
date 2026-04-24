@@ -9,8 +9,8 @@ interface Props {
 
 export function WhatsAppButton({ whatsappNumber = "919205876091" }: Props) {
   const message = encodeURIComponent("Hello! I'm interested in automotive parts from RR Auto Revamp.");
-  // Strip +, spaces, dashes — wa.me needs plain digits only
-  const cleanNumber = whatsappNumber.replace(/[\s+\-()]/g, "");
+  // Strip ALL non-digits — wa.me needs plain digits only (e.g. 919205876091)
+  const cleanNumber = whatsappNumber.replace(/\D/g, "");
 
   return (
     <motion.a
