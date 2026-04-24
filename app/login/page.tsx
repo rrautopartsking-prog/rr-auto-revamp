@@ -61,7 +61,7 @@ export default function LoginPage() {
             <input
               {...register("email")}
               type="email"
-              placeholder="rrautopartsking@gmail.com"
+              placeholder="Email address"
               className="input-premium"
               autoComplete="email"
             />
