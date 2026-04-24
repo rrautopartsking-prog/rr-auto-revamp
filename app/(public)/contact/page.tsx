@@ -16,7 +16,7 @@ export default async function ContactPage() {
   const phone = settings.contact_phone || "+91 84481 76091";
   const email = settings.contact_email || "info@rrautorevamp.com";
   const address = settings.contact_address || "Delhi, India";
-  const whatsapp = settings.whatsapp_number || "919205876091";
+  const whatsapp = (settings.whatsapp_number || "919205876091").replace(/[\s+\-()]/g, "");
 
   const contactInfo = [
     { icon: Phone, label: "Phone", value: phone, href: `tel:${phone.replace(/\s/g, "")}` },
