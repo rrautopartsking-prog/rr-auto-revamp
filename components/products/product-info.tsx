@@ -140,7 +140,7 @@ export function ProductInfo({ product }: Props) {
           Request This Part <ArrowRight size={16} />
         </a>
         <a
-          href={`https://wa.me/918448176091?text=${encodeURIComponent(`Hi, I'm interested in: ${product.name} (SKU: ${product.sku || "N/A"})`)}`}
+          href={`https://wa.me/rrautorevamp?text=${encodeURIComponent(`Hi, I'm interested in: ${product.name} (SKU: ${product.sku || "N/A"})`)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="w-12 h-12 bg-[#25D366]/10 border border-[#25D366]/30 rounded-sm flex items-center justify-center text-[#25D366] hover:bg-[#25D366]/20 transition-all"

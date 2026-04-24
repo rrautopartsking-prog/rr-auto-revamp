@@ -7,7 +7,7 @@ interface Props {
   whatsappNumber?: string;
 }
 
-export function WhatsAppButton({ whatsappNumber = "918448176091" }: Props) {
+export function WhatsAppButton({ whatsappNumber = "rrautorevamp" }: Props) {
   const message = encodeURIComponent("Hello! I'm interested in automotive parts from RR Auto Revamp.");
 
   return (

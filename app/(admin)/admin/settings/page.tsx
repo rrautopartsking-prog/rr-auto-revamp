@@ -9,7 +9,7 @@ const defaultSettings: Record<string, string> = {
   contact_phone: "+91 84481 76091",
   contact_email: "rrautopartsking@gmail.com",
   contact_address: "Delhi, India",
-  whatsapp_number: "+918448176091",
+  whatsapp_number: "919205876091",
   google_analytics_id: "",
   meta_pixel_id: "",
   social_instagram: "https://www.instagram.com/rr_auto_revamp/",

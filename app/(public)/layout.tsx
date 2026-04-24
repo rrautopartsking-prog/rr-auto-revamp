@@ -5,7 +5,7 @@ import { getSettings } from "@/lib/settings";
 
 export default async function PublicLayout({ children }: { children: React.ReactNode }) {
   const settings = await getSettings();
-  const whatsappNumber = settings.whatsapp_number || "918448176091";
+  const whatsappNumber = settings.whatsapp_number || "rrautorevamp";
 
   return (
     <div className="min-h-screen flex flex-col">

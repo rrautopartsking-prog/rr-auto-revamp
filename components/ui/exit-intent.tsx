@@ -79,7 +79,7 @@ export function ExitIntent() {
                 className="btn-gold w-full flex items-center justify-center gap-2">
                 Get a Free Quote <ArrowRight size={16} />
               </Link>
-              <a href="https://wa.me/918448176091" target="_blank" rel="noopener noreferrer"
+              <a href="https://wa.me/rrautorevamp" target="_blank" rel="noopener noreferrer"
                 onClick={() => setVisible(false)}
                 className="block w-full py-3 px-4 bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] rounded-lg text-sm font-semibold hover:bg-[#25D366]/20 transition-colors">
                 💬 Chat on WhatsApp Instead

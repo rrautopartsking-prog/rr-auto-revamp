@@ -113,7 +113,7 @@ export function InquiryForm({ productId, productName, prefillBrand, prefillModel
         <div className="bg-carbon-900 border border-carbon-700 rounded-lg p-4 mb-6 text-left">
           <p className="text-carbon-400 text-xs mb-1">Need a faster response?</p>
           <a
-            href="https://wa.me/918448176091"
+            href="https://wa.me/rrautorevamp"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-gold transition-colors"
