@@ -24,7 +24,13 @@ export async function Footer() {
   const rawPhone = settings.contact_phone || "+91 84481 76091";
   const phones = rawPhone.split(",").map((p) => p.trim()).filter(Boolean);
   const email = settings.contact_email || "info@rrautorevamp.com";
-  const address = settings.contact_address || "Delhi, India";
+  const address = settings.contact_address || "Shop no 58, Sehgal Motor Market, Kashmere Gate, Delhi - 110006";
+  const mapUrl = settings.contact_map_url || "https://maps.app.goo.gl/HfM4TdLYaRxBh8yB7";
+  const mapsEmbedSrc =
+    settings.contact_map_embed ||
+    `https://maps.google.com/maps?q=${encodeURIComponent(
+      "Shop no 58, R R AUTO REVAMP, Sehgal Motor Market, Chabi Ganj, Kashmere Gate, Delhi, 110006"
+    )}&output=embed&z=17`;
   // Strip +, spaces, dashes so wa.me link always works
   const whatsapp = (settings.whatsapp_number || "919205876091").replace(/\D/g, "");
   const instagram = settings.social_instagram || "https://www.instagram.com/rr_auto_revamp/";
@@ -129,7 +135,33 @@ export async function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+        {/* Mini Map */}
+        <div className="mt-12 rounded-xl overflow-hidden border border-white/10">
+          <div className="w-full h-[180px]">
+            <iframe
+              src={mapsEmbedSrc}
+              width="100%"
+              height="100%"
+              style={{ border: 0, display: "block" }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="RR Auto Revamp Location"
+            />
+          </div>
+          <div className="flex items-center justify-between px-4 py-2 bg-carbon-900 border-t border-white/10">
+            <span className="text-carbon-500 text-xs truncate">{address}</span>
+            <a
+              href={mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold text-xs hover:underline shrink-0 ml-3"
+            >
+              View larger map ↗
+            </a>
+          </div>
+        </div>
+
+        <div className="mt-6 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-carbon-500 text-xs">
             © {new Date().getFullYear()} RR Auto Revamp. All rights reserved.
           </p>
