@@ -7,6 +7,7 @@ const defaults: Record<string, string> = {
   contact_email: "info@rrautorevamp.com",
   contact_address: "Delhi, India",
   contact_map_url: "https://maps.app.goo.gl/HfiZ1CQgV7w7BctV6",
+  contact_map_embed: "",
   whatsapp_number: "919205876091",
   google_analytics_id: "",
   meta_pixel_id: "",

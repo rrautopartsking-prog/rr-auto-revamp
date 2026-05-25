@@ -132,6 +132,13 @@ export function SettingsForm({ settings: initialSettings }: Props) {
           placeholder="https://maps.app.goo.gl/..."
           hint="Paste your Google Maps share link — shown as an embedded map on the contact page"
         />
+        <Field
+          label="Google Maps Embed URL"
+          value={values.contact_map_embed || ""}
+          onChange={(v) => update("contact_map_embed", v)}
+          placeholder="https://www.google.com/maps/embed?pb=..."
+          hint='Go to Google Maps → your location → Share → Embed a map → copy only the src="..." URL and paste here'
+        />
       </div>
 
       {/* Analytics */}

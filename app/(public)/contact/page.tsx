@@ -22,8 +22,13 @@ export default async function ContactPage() {
   const whatsapp = (settings.whatsapp_number || "919205876091").replace(/\D/g, "");
   const mapUrl = settings.contact_map_url || "https://maps.app.goo.gl/HfiZ1CQgV7w7BctV6";
 
-  // Google Maps embed — works with both short links and full URLs
-  const mapsEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(mapUrl)}&output=embed&z=16`;
+  // contact_map_embed is the full iframe src from Google Maps > Share > Embed a map
+  // Falls back to a search query embed if not set
+  const mapsEmbedSrc =
+    settings.contact_map_embed ||
+    `https://maps.google.com/maps?q=${encodeURIComponent(
+      settings.contact_address || "RR Auto Revamp, Delhi, India"
+    )}&output=embed&z=16`;
 
   return (
     <div className="min-h-screen bg-carbon-950 pt-20">
