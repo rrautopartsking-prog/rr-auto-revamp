@@ -6,6 +6,7 @@ const defaults: Record<string, string> = {
   contact_phone: "+91 84481 76091",
   contact_email: "info@rrautorevamp.com",
   contact_address: "Delhi, India",
+  contact_map_url: "https://maps.app.goo.gl/HfiZ1CQgV7w7BctV6",
   whatsapp_number: "919205876091",
   google_analytics_id: "",
   meta_pixel_id: "",

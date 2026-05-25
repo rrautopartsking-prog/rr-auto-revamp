@@ -22,9 +22,12 @@ export default async function ContactPage() {
   const address = settings.contact_address || "Delhi, India";
   const whatsapp = (settings.whatsapp_number || "919205876091").replace(/\D/g, "");
 
+  const mapUrl = settings.contact_map_url || "https://maps.app.goo.gl/HfiZ1CQgV7w7BctV6";
+  const mapsEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(mapUrl)}&output=embed&z=16`;
+
   const staticContactInfo = [
     { icon: Mail, label: "Email", value: email, href: `mailto:${email}` },
-    { icon: MapPin, label: "Location", value: address, href: "#" },
+    { icon: MapPin, label: "Location", value: address, href: mapUrl },
     { icon: Clock, label: "Hours", value: "Mon–Sat: 9AM – 7PM IST", href: "#" },
   ];
 
@@ -80,6 +83,36 @@ export default async function ContactPage() {
           {/* Form */}
           <div className="lg:col-span-2">
             <InquiryForm type="GENERAL_INQUIRY" />
+          </div>
+        </div>
+
+        {/* Map */}
+        <div className="max-w-5xl mx-auto mt-10">
+          <div className="glass rounded-xl overflow-hidden border border-white/10">
+            <div className="flex items-center justify-between px-5 py-3 border-b border-white/10">
+              <div className="flex items-center gap-2">
+                <MapPin size={16} className="text-gold" />
+                <span className="text-white text-sm font-medium">Our Location</span>
+              </div>
+              <a
+                href={mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold text-xs hover:underline flex items-center gap-1"
+              >
+                Open in Google Maps ↗
+              </a>
+            </div>
+            <iframe
+              src={mapsEmbedSrc}
+              width="100%"
+              height="380"
+              style={{ border: 0, display: "block" }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="RR Auto Revamp Location"
+            />
           </div>
         </div>
       </div>

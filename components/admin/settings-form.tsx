@@ -125,6 +125,13 @@ export function SettingsForm({ settings: initialSettings }: Props) {
           onChange={(v) => update("contact_address", v)}
           placeholder="Delhi, India"
         />
+        <Field
+          label="Google Maps URL"
+          value={values.contact_map_url || ""}
+          onChange={(v) => update("contact_map_url", v)}
+          placeholder="https://maps.app.goo.gl/..."
+          hint="Paste your Google Maps share link — shown as an embedded map on the contact page"
+        />
       </div>
 
       {/* Analytics */}
