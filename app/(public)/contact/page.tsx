@@ -20,15 +20,14 @@ export default async function ContactPage() {
   const email = settings.contact_email || "info@rrautorevamp.com";
   const address = settings.contact_address || "Delhi, India";
   const whatsapp = (settings.whatsapp_number || "919205876091").replace(/\D/g, "");
-  const mapUrl = settings.contact_map_url || "https://maps.app.goo.gl/HfiZ1CQgV7w7BctV6";
+  const mapUrl = settings.contact_map_url || "https://maps.app.goo.gl/HfM4TdLYaRxBh8yB7";
 
-  // contact_map_embed is the full iframe src from Google Maps > Share > Embed a map
-  // Falls back to a search query embed if not set
+  // Embed using exact address resolved from the short link
   const mapsEmbedSrc =
     settings.contact_map_embed ||
     `https://maps.google.com/maps?q=${encodeURIComponent(
-      settings.contact_address || "RR Auto Revamp, Delhi, India"
-    )}&output=embed&z=16`;
+      "Shop no 58, R R AUTO REVAMP, Sehgal Motor Market, Chabi Ganj, Kashmere Gate, Delhi, 110006"
+    )}&output=embed&z=17`;
 
   return (
     <div className="min-h-screen bg-carbon-950 pt-20">
