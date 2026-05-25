@@ -62,9 +62,9 @@ export default async function ContactPage() {
             {/* Info strip — 2 col on mobile, 4 col on desktop, clean text like reference */}
             <div className="grid grid-cols-2 md:grid-cols-4 border-t border-white/10">
 
-              {/* Office */}
+              {/* Shop */}
               <div className="px-6 py-5 border-r border-white/10">
-                <p className="text-carbon-500 text-xs mb-2 uppercase tracking-widest">Office</p>
+                <p className="text-carbon-500 text-xs mb-2 uppercase tracking-widest">Shop</p>
                 <a
                   href={mapUrl}
                   target="_blank"
