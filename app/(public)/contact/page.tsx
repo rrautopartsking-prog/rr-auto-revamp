@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { InquiryForm } from "@/components/forms/inquiry-form";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Mail, MapPin, Clock } from "lucide-react";
 import { getSettings } from "@/lib/settings";
+import { PhoneSelector } from "@/components/ui/phone-selector";
 
 export const dynamic = "force-dynamic";
 
@@ -13,13 +14,15 @@ export const metadata: Metadata = {
 export default async function ContactPage() {
   const settings = await getSettings();
 
-  const phone = settings.contact_phone || "+91 84481 76091";
+  // Support multiple comma-separated phone numbers e.g. "+91 84481 76091, +91 92058 76091"
+  const rawPhone = settings.contact_phone || "+91 84481 76091";
+  const phones = rawPhone.split(",").map((p) => p.trim()).filter(Boolean);
+
   const email = settings.contact_email || "info@rrautorevamp.com";
   const address = settings.contact_address || "Delhi, India";
   const whatsapp = (settings.whatsapp_number || "919205876091").replace(/\D/g, "");
 
-  const contactInfo = [
-    { icon: Phone, label: "Phone", value: phone, href: `tel:${phone.replace(/\s/g, "")}` },
+  const staticContactInfo = [
     { icon: Mail, label: "Email", value: email, href: `mailto:${email}` },
     { icon: MapPin, label: "Location", value: address, href: "#" },
     { icon: Clock, label: "Hours", value: "Mon–Sat: 9AM – 7PM IST", href: "#" },
@@ -39,7 +42,10 @@ export default async function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-5xl mx-auto">
           {/* Contact info */}
           <div className="space-y-4">
-            {contactInfo.map((item) => (
+            {/* Phone — shows picker if multiple numbers */}
+            <PhoneSelector phones={phones} />
+
+            {staticContactInfo.map((item) => (
               <a key={item.label} href={item.href}
                 className="flex items-start gap-4 glass rounded-lg p-4 hover:border-gold/30 transition-all group">
                 <div className="w-10 h-10 bg-gold/10 rounded-sm flex items-center justify-center shrink-0 group-hover:bg-gold/20 transition-colors">

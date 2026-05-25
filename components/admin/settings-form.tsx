@@ -103,7 +103,7 @@ export function SettingsForm({ settings: initialSettings }: Props) {
           value={values.contact_phone || ""}
           onChange={(v) => update("contact_phone", v)}
           placeholder="+91 84481 76091"
-          hint="Displayed on contact page and footer"
+          hint="For multiple numbers, separate with commas: +91 84481 76091, +91 92058 76091"
         />
         <Field
           label="WhatsApp Number"
