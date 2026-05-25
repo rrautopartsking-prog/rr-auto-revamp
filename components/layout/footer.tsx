@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin, Instagram, Facebook, Youtube } from "lucide-react";
 import { getSettings } from "@/lib/settings";
+import { FooterPhoneList } from "@/components/ui/footer-phone-list";
 
 const footerLinks = {
   company: [
@@ -20,7 +21,8 @@ const footerLinks = {
 
 export async function Footer() {
   const settings = await getSettings();
-  const phone = settings.contact_phone || "+91 84481 76091";
+  const rawPhone = settings.contact_phone || "+91 84481 76091";
+  const phones = rawPhone.split(",").map((p) => p.trim()).filter(Boolean);
   const email = settings.contact_email || "info@rrautorevamp.com";
   const address = settings.contact_address || "Delhi, India";
   // Strip +, spaces, dashes so wa.me link always works
@@ -101,10 +103,7 @@ export async function Footer() {
               </li>
               <li className="flex items-center gap-3 text-sm">
                 <Phone size={16} className="text-gold shrink-0" />
-                <a href={`tel:${phone.replace(/\s/g, "")}`}
-                  className="text-carbon-400 hover:text-gold transition-colors">
-                  {phone}
-                </a>
+                <FooterPhoneList phones={phones} />
               </li>
               <li className="flex items-center gap-3 text-sm">
                 <Mail size={16} className="text-gold shrink-0" />

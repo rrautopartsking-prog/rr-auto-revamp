@@ -21,7 +21,8 @@ async function getSettings() {
   if (!isDbConnected()) return defaultSettings;
   const { prisma } = await import("@/lib/prisma");
   const settings = await prisma.siteSettings.findMany();
-  return Object.fromEntries(settings.map((s) => [s.key, s.value]));
+  const fromDb = Object.fromEntries(settings.map((s) => [s.key, s.value]));
+  return { ...defaultSettings, ...fromDb };
 }
 
 export default async function AdminSettingsPage() {

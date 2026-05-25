@@ -99,10 +99,10 @@ export function SettingsForm({ settings: initialSettings }: Props) {
         <h3 className="font-display font-semibold text-white">Contact Information</h3>
         <p className="text-carbon-500 text-xs">These values appear on the website footer and contact page.</p>
         <Field
-          label="Phone Number"
+          label="Phone Number(s)"
           value={values.contact_phone || ""}
           onChange={(v) => update("contact_phone", v)}
-          placeholder="+91 84481 76091"
+          placeholder="+91 84481 76091, +91 92058 76091"
           hint="For multiple numbers, separate with commas: +91 84481 76091, +91 92058 76091"
         />
         <Field
