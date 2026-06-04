@@ -25,7 +25,7 @@ export function Analytics({ gaId: gaIdProp, pixelId: pixelIdProp }: AnalyticsPro
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '${gaId}', { page_path: window.location.pathname });
+              gtag('config', '${gaId}');
             `}
           </Script>
         </>

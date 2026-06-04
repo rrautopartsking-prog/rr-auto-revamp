@@ -144,7 +144,7 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const settings = await getSettings();
-  const gaId = settings.google_analytics_id || undefined;
+  const gaId = settings.google_analytics_id || "G-S3L852Q8DS";
   const pixelId = settings.meta_pixel_id || undefined;
 
   return (
