@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Phone, ChevronDown } from "lucide-react";
+import { gaEvents } from "@/lib/gtag";
 
 interface PhoneSelectorProps {
   phones: string[]; // array of phone numbers
@@ -71,7 +72,7 @@ export function PhoneSelector({ phones }: PhoneSelectorProps) {
             <a
               key={i}
               href={`tel:${phone.replace(/\s/g, "")}`}
-              onClick={() => setOpen(false)}
+              onClick={() => { gaEvents.phoneClick(phone, "contact_page"); setOpen(false); }}
               className="flex items-center gap-3 px-4 py-3 hover:bg-gold/10 transition-colors group"
             >
               <div className="w-7 h-7 bg-gold/10 rounded-sm flex items-center justify-center shrink-0 group-hover:bg-gold/20 transition-colors">

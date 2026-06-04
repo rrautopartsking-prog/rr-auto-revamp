@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
+import { gaEvents } from "@/lib/gtag";
 
 interface Props {
   whatsappNumber?: string;
@@ -9,7 +10,6 @@ interface Props {
 
 export function WhatsAppButton({ whatsappNumber = "919205876091" }: Props) {
   const message = encodeURIComponent("Hello! I'm interested in automotive parts from RR Auto Revamp.");
-  // Strip ALL non-digits — wa.me needs plain digits only (e.g. 919205876091)
   const cleanNumber = whatsappNumber.replace(/\D/g, "");
 
   return (
@@ -17,6 +17,7 @@ export function WhatsAppButton({ whatsappNumber = "919205876091" }: Props) {
       href={`https://wa.me/${cleanNumber}?text=${message}`}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => gaEvents.whatsappClick("floating_button")}
       className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:shadow-[0_0_20px_rgba(37,211,102,0.4)] transition-shadow"
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}

@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Rajdhani } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { Analytics } from "@/components/analytics";
+import { PageViewTracker } from "@/components/page-view-tracker";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { getSettings } from "@/lib/settings";
 
@@ -179,6 +181,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           />
         </ThemeProvider>
         <Analytics gaId={gaId} pixelId={pixelId} />
+        <Suspense fallback={null}><PageViewTracker /></Suspense>
         <SpeedInsights />
       </body>
     </html>

@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { Upload, Send, CheckCircle, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
+import { gaEvents } from "@/lib/gtag";
 import { leadSchema, type LeadInput } from "@/lib/validations";
 import { CAR_BRANDS, getModelsForBrand, generateYears, FUEL_TYPES, COUNTRY_SPECS } from "@/lib/car-data";
 
@@ -84,6 +85,7 @@ export function InquiryForm({ productId, productName, prefillBrand, prefillModel
 
       setIsSubmitted(true);
       localStorage.removeItem(DRAFT_KEY);
+      gaEvents.inquirySubmit(data.type, data.brand, data.partName);
       toast.success("Inquiry submitted! Check your email for confirmation.", { duration: 5000 });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Something went wrong");
