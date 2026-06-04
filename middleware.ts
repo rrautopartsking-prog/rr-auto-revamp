@@ -36,7 +36,11 @@ export async function middleware(req: NextRequest) {
       req.method === "GET" &&
       (pathname.startsWith("/api/products") || pathname.startsWith("/api/blog"));
 
-    if (!isPublicGet) {
+    // Allow public POST to /api/leads — this is the inquiry form submission from visitors
+    const isPublicLeadSubmit =
+      req.method === "POST" && pathname === "/api/leads";
+
+    if (!isPublicGet && !isPublicLeadSubmit) {
       const token =
         req.cookies.get("auth_token")?.value ||
         req.headers.get("authorization")?.replace("Bearer ", "");
