@@ -136,6 +136,9 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
   manifest: "/manifest.json",
+  verification: {
+    google: "CR5CTeth5liNIX-Um9FpaNFCl3OrjF6xSlXkdK5gKOc",
+  },
 };
 
 export const viewport: Viewport = {
