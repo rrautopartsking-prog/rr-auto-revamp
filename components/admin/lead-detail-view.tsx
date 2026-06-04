@@ -36,14 +36,15 @@ export function LeadDetailView({ lead }: Props) {
   const handleUpdate = async (newStatus?: string, newScore?: string, newNote?: string) => {
     setIsUpdating(true);
     try {
+      const body: Record<string, string> = {};
+      if (newStatus) body.status = newStatus;
+      if (newScore)  body.score  = newScore;
+      if (newNote)   body.note   = newNote;
+
       const res = await fetch(`/api/leads/${lead.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          status: newStatus || status,
-          score: newScore || score,
-          note: newNote,
-        }),
+        body: JSON.stringify(body),
       });
 
       if (!res.ok) throw new Error("Update failed");

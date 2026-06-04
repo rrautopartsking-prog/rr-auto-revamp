@@ -41,10 +41,13 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     }
     if (score) updateData.score = score;
 
-    const lead = await prisma.lead.update({
-      where: { id: params.id },
-      data: updateData,
-    });
+    // Only run lead.update if there's something to update
+    if (Object.keys(updateData).length > 0) {
+      await prisma.lead.update({
+        where: { id: params.id },
+        data: updateData,
+      });
+    }
 
     if (note) {
       await prisma.leadNote.create({
@@ -52,6 +55,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
       });
     }
 
+    const lead = await prisma.lead.findUnique({ where: { id: params.id } });
     return NextResponse.json<ApiResponse>({ success: true, data: lead });
   } catch (error) {
     console.error("Lead update error:", error);
