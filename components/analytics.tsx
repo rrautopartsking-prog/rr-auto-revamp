@@ -2,9 +2,15 @@
 
 import Script from "next/script";
 
-export function Analytics() {
-  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-  const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+interface AnalyticsProps {
+  gaId?: string;
+  pixelId?: string;
+}
+
+export function Analytics({ gaId: gaIdProp, pixelId: pixelIdProp }: AnalyticsProps = {}) {
+  // Use prop (from DB settings) first, fall back to env var
+  const gaId = gaIdProp || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const pixelId = pixelIdProp || process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
   return (
     <>

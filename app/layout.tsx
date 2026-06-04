@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { Analytics } from "@/components/analytics";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { getSettings } from "@/lib/settings";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -141,7 +142,11 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const settings = await getSettings();
+  const gaId = settings.google_analytics_id || undefined;
+  const pixelId = settings.meta_pixel_id || undefined;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${rajdhani.variable} font-sans antialiased`}>
@@ -159,7 +164,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }}
           />
         </ThemeProvider>
-        <Analytics />
+        <Analytics gaId={gaId} pixelId={pixelId} />
         <SpeedInsights />
       </body>
     </html>
