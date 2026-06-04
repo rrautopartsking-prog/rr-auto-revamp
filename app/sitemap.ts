@@ -1,50 +1,49 @@
 import { MetadataRoute } from "next";
-import { prisma } from "@/lib/prisma";
+import { isDbConnected } from "@/lib/db";
+
+const BASE_URL = "https://rrautorevamp.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://rrautorevamp.com";
-
-  let products: { slug: string; updatedAt: Date }[] = [];
-  let blogPosts: { slug: string; updatedAt: Date }[] = [];
-  let categories: { slug: string }[] = [];
-
-  try {
-    [products, blogPosts, categories] = await Promise.all([
-      prisma.product.findMany({ where: { isActive: true }, select: { slug: true, updatedAt: true } }),
-      prisma.blogPost.findMany({ where: { isPublished: true }, select: { slug: true, updatedAt: true } }),
-      prisma.category.findMany({ where: { isActive: true }, select: { slug: true } }),
-    ]);
-  } catch (e) {
-    console.error("Sitemap DB error:", e);
-  }
-
   const staticPages: MetadataRoute.Sitemap = [
-    { url: baseUrl, lastModified: new Date(), changeFrequency: "daily", priority: 1 },
-    { url: `${baseUrl}/products`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
-    { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
-    { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+    { url: BASE_URL, lastModified: new Date(), changeFrequency: "daily", priority: 1.0 },
+    { url: `${BASE_URL}/products`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
+    { url: `${BASE_URL}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE_URL}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE_URL}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
   ];
 
-  const productPages: MetadataRoute.Sitemap = products.map((p) => ({
-    url: `${baseUrl}/products/${p.slug}`,
-    lastModified: p.updatedAt,
-    changeFrequency: "weekly",
-    priority: 0.8,
-  }));
+  if (!isDbConnected()) return staticPages;
 
-  const blogPages: MetadataRoute.Sitemap = blogPosts.map((p) => ({
-    url: `${baseUrl}/blog/${p.slug}`,
-    lastModified: p.updatedAt,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
+  try {
+    const { prisma } = await import("@/lib/prisma");
 
-  const categoryPages: MetadataRoute.Sitemap = categories.map((c) => ({
-    url: `${baseUrl}/products?category=${c.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: 0.7,
-  }));
+    const [products, posts] = await Promise.all([
+      prisma.product.findMany({
+        where: { isActive: true },
+        select: { slug: true, updatedAt: true },
+      }),
+      prisma.blogPost.findMany({
+        where: { isPublished: true },
+        select: { slug: true, updatedAt: true },
+      }),
+    ]);
 
-  return [...staticPages, ...productPages, ...blogPages, ...categoryPages];
+    const productPages: MetadataRoute.Sitemap = products.map((p) => ({
+      url: `${BASE_URL}/products/${p.slug}`,
+      lastModified: p.updatedAt,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    }));
+
+    const blogPages: MetadataRoute.Sitemap = posts.map((p) => ({
+      url: `${BASE_URL}/blog/${p.slug}`,
+      lastModified: p.updatedAt,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    }));
+
+    return [...staticPages, ...productPages, ...blogPages];
+  } catch {
+    return staticPages;
+  }
 }

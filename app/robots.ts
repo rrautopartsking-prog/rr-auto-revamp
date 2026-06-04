@@ -1,15 +1,15 @@
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://rrautorevamp.com";
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin", "/api", "/login"],
+        disallow: ["/admin", "/api/", "/login"],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: "https://rrautorevamp.com/sitemap.xml",
+    host: "https://rrautorevamp.com",
   };
 }

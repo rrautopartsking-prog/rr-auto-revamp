@@ -23,15 +23,55 @@ async function getPost(slug: string) {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const post = await getPost(params.slug);
   if (!post) return { title: "Not Found" };
-  return { title: post.metaTitle || post.title, description: post.metaDesc || post.excerpt || undefined };
+
+  const title = post.metaTitle || `${post.title} | RR Auto Revamp Blog`;
+  const description = post.metaDesc || post.excerpt || "Automotive insights from RR Auto Revamp Delhi.";
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `https://rrautorevamp.com/blog/${post.slug}` },
+    openGraph: {
+      title,
+      description,
+      url: `https://rrautorevamp.com/blog/${post.slug}`,
+      type: "article",
+      publishedTime: post.publishedAt?.toISOString(),
+      images: post.coverImage ? [{ url: post.coverImage, alt: post.title }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: post.coverImage ? [post.coverImage] : [],
+    },
+  };
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
   const post = await getPost(params.slug);
   if (!post) notFound();
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt || "",
+    image: post.coverImage || "",
+    author: { "@type": "Person", name: post.author.name },
+    publisher: {
+      "@type": "Organization",
+      name: "RR Auto Revamp",
+      logo: { "@type": "ImageObject", url: "https://rrautorevamp.com/og-image.jpg" },
+    },
+    datePublished: post.publishedAt?.toISOString(),
+    dateModified: post.updatedAt?.toISOString(),
+    mainEntityOfPage: `https://rrautorevamp.com/blog/${post.slug}`,
+  };
+
   return (
     <div className="min-h-screen bg-carbon-950 pt-20">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <article className="container mx-auto px-4 py-16 max-w-3xl">
         {post.category && <span className="text-gold text-xs font-semibold tracking-[0.3em] uppercase">{post.category}</span>}
         <h1 className="font-display text-4xl md:text-5xl font-bold text-white mt-3 mb-4 leading-tight">{post.title}</h1>

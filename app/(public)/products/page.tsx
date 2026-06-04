@@ -10,8 +10,19 @@ import { isDbConnected } from "@/lib/db";
 import type { SearchFilters } from "@/types/api";
 
 export const metadata: Metadata = {
-  title: "Products — Premium Automotive Parts",
-  description: "Browse our extensive catalog of OEM, aftermarket, and performance automotive parts.",
+  title: "Car Spare Parts in Delhi — OEM & Aftermarket | RR Auto Revamp",
+  description:
+    "Browse 1000+ OEM, aftermarket & performance car spare parts in Delhi. BMW, Mercedes, Audi, Maruti, Hyundai, Toyota & more. Fast delivery across India.",
+  keywords: [
+    "car spare parts Delhi", "buy auto parts online India", "OEM spare parts Delhi",
+    "BMW parts Delhi", "Mercedes spare parts", "aftermarket car parts",
+  ],
+  alternates: { canonical: "https://rrautorevamp.com/products" },
+  openGraph: {
+    title: "Car Spare Parts Delhi — RR Auto Revamp",
+    description: "1000+ OEM & aftermarket car parts. BMW, Mercedes, Audi, Maruti & more.",
+    url: "https://rrautorevamp.com/products",
+  },
 };
 
 interface PageProps {

@@ -8,8 +8,15 @@ import { isDbConnected } from "@/lib/db";
 import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Blog — Automotive Insights",
-  description: "Expert automotive tips, maintenance guides, and industry insights from RR Auto Revamp.",
+  title: "Auto Parts Blog — Car Tips & Guides Delhi | RR Auto Revamp",
+  description:
+    "Expert car maintenance tips, spare parts guides, and automotive insights for Delhi drivers. BMW, Mercedes, Maruti, Hyundai care advice from RR Auto Revamp.",
+  alternates: { canonical: "https://rrautorevamp.com/blog" },
+  openGraph: {
+    title: "Automotive Blog — RR Auto Revamp Delhi",
+    description: "Car tips, maintenance guides & spare parts advice for Delhi car owners.",
+    url: "https://rrautorevamp.com/blog",
+  },
 };
 
 async function getPosts() {

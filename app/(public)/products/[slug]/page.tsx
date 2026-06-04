@@ -56,10 +56,30 @@ async function getReviews(productId: string) {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const product = await getProduct(params.slug);
   if (!product) return { title: "Product Not Found" };
+
+  const title = product.metaTitle || `${product.name} — Buy in Delhi | RR Auto Revamp`;
+  const description =
+    product.metaDesc ||
+    product.shortDesc ||
+    `Buy ${product.name} in Delhi. OEM & aftermarket available. ${product.brands?.join(", ") || ""} spare parts at RR Auto Revamp, Kashmere Gate.`;
+
   return {
-    title: product.metaTitle || product.name,
-    description: product.metaDesc || product.shortDesc || undefined,
-    openGraph: { images: product.images[0] ? [{ url: product.images[0] }] : [] },
+    title,
+    description,
+    alternates: { canonical: `https://rrautorevamp.com/products/${product.slug}` },
+    openGraph: {
+      title,
+      description,
+      url: `https://rrautorevamp.com/products/${product.slug}`,
+      images: product.images[0] ? [{ url: product.images[0], alt: product.name }] : [],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: product.images[0] ? [product.images[0]] : [],
+    },
   };
 }
 

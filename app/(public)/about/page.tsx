@@ -6,9 +6,15 @@ import { isDbConnected } from "@/lib/db";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "About Us — RR Auto Revamp",
+  title: "About RR Auto Revamp — Car Parts Shop Delhi | Kashmere Gate",
   description:
-    "Learn the story behind RR Auto Revamp — India's most trusted automotive parts sourcing partner. Built by gearheads, for gearheads.",
+    "RR Auto Revamp at Shop 58, Sehgal Motor Market, Kashmere Gate, Delhi. Trusted supplier of OEM & aftermarket spare parts for BMW, Mercedes, Audi, Maruti and all brands since years.",
+  alternates: { canonical: "https://rrautorevamp.com/about" },
+  openGraph: {
+    title: "About RR Auto Revamp — Delhi's Trusted Auto Parts Supplier",
+    description: "Shop 58, Sehgal Motor Market, Kashmere Gate, Delhi. OEM & aftermarket parts for all brands.",
+    url: "https://rrautorevamp.com/about",
+  },
 };
 
 async function getAboutData() {
