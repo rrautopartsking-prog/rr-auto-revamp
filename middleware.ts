@@ -30,29 +30,30 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next({ request: { headers: requestHeaders } });
   }
 
-  // Protect admin API routes (except GET /api/products and GET /api/blog which are public)
+  // Protect admin API routes
   if (ADMIN_API_PATHS.some((p) => pathname.startsWith(p))) {
-    const isPublicGet =
-      req.method === "GET" &&
-      (pathname.startsWith("/api/products") || pathname.startsWith("/api/blog"));
 
-    // Allow public POST to /api/leads — this is the inquiry form submission from visitors
-    const isPublicLeadSubmit =
-      req.method === "POST" && pathname === "/api/leads";
+    // ── Public exceptions (no auth needed) ──
+    const isPublicProductsGet = req.method === "GET" && pathname.startsWith("/api/products");
+    const isPublicBlogGet     = req.method === "GET" && pathname.startsWith("/api/blog");
+    const isPublicLeadPost    = req.method === "POST" && pathname === "/api/leads"; // inquiry form
 
-    if (!isPublicGet && !isPublicLeadSubmit) {
-      const token =
-        req.cookies.get("auth_token")?.value ||
-        req.headers.get("authorization")?.replace("Bearer ", "");
+    if (isPublicProductsGet || isPublicBlogGet || isPublicLeadPost) {
+      return NextResponse.next();
+    }
 
-      if (!token) {
-        return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
-      }
+    // Everything else requires auth
+    const token =
+      req.cookies.get("auth_token")?.value ||
+      req.headers.get("authorization")?.replace("Bearer ", "");
 
-      const payload = await verifyToken(token);
-      if (!payload) {
-        return NextResponse.json({ success: false, error: "Invalid token" }, { status: 401 });
-      }
+    if (!token) {
+      return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
+    }
+
+    const payload = await verifyToken(token);
+    if (!payload) {
+      return NextResponse.json({ success: false, error: "Invalid token" }, { status: 401 });
     }
   }
 
@@ -60,5 +61,14 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/leads/:path*", "/api/products/:path*", "/api/blog/:path*", "/api/reviews/:path*", "/api/upload/:path*", "/api/dashboard/:path*"],
+  matcher: [
+    "/admin/:path*",
+    "/api/leads",
+    "/api/leads/:path*",
+    "/api/products/:path*",
+    "/api/blog/:path*",
+    "/api/reviews/:path*",
+    "/api/upload/:path*",
+    "/api/dashboard/:path*",
+  ],
 };
