@@ -5,7 +5,7 @@ const defaults: Record<string, string> = {
   site_tagline: "Premium Automotive Parts",
   contact_phone: "+91 84481 76091",
   contact_email: "info@rrautorevamp.com",
-  contact_address: "9, The Auto Stores, 1390, Nicholson Rd, Kashmere Gate, Delhi - 110006",
+  contact_address: "9, 1390, Nicholson Rd, Kashmere Gate, Delhi, 110006",
   contact_map_url: "https://maps.app.goo.gl/YLXKF1DAMCxqvPAi9",
   contact_map_embed: "",
   whatsapp_number: "919205876091",

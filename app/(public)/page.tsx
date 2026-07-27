@@ -14,7 +14,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "RR Auto Revamp — Premium Car Spare Parts in Delhi, India",
   description:
-    "Buy OEM, aftermarket & performance car spare parts in Delhi. 9, The Auto Stores, 1390 Nicholson Rd, Kashmere Gate. BMW, Mercedes, Audi, Maruti, Hyundai & more. Call +91 84481 76091.",
+    "Buy OEM, aftermarket & performance car spare parts in Delhi. 9, 1390, Nicholson Rd, Kashmere Gate. BMW, Mercedes, Audi, Maruti, Hyundai & more. Call +91 84481 76091.",
   keywords: [
     "car spare parts Delhi", "auto parts Kashmere Gate", "OEM car parts Delhi",
     "imported car parts Delhi", "BMW parts Delhi", "Mercedes parts Delhi",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://rrautorevamp.com" },
   openGraph: {
     title: "RR Auto Revamp — Premium Car Spare Parts Delhi",
-    description: "OEM, aftermarket & performance car parts at 9, The Auto Stores, 1390 Nicholson Rd, Kashmere Gate, Delhi.",
+    description: "OEM, aftermarket & performance car parts at 9, 1390, Nicholson Rd, Kashmere Gate, Delhi.",
     url: "https://rrautorevamp.com",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "RR Auto Revamp" }],
   },
@@ -66,7 +66,7 @@ export default async function HomePage() {
     telephone: "+918448176091",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "9, The Auto Stores, 1390, Nicholson Rd",
+      streetAddress: "9, 1390, Nicholson Rd",
       addressLocality: "Kashmere Gate",
       addressRegion: "Delhi",
       postalCode: "110006",

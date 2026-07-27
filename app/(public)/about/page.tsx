@@ -8,11 +8,11 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "About RR Auto Revamp — Car Parts Shop Delhi | Kashmere Gate",
   description:
-    "RR Auto Revamp at 9, The Auto Stores, 1390 Nicholson Rd, Kashmere Gate, Delhi. Trusted supplier of OEM & aftermarket spare parts for BMW, Mercedes, Audi, Maruti and all brands since years.",
+    "RR Auto Revamp at 9, 1390, Nicholson Rd, Kashmere Gate, Delhi. Trusted supplier of OEM & aftermarket spare parts for BMW, Mercedes, Audi, Maruti and all brands since years.",
   alternates: { canonical: "https://rrautorevamp.com/about" },
   openGraph: {
     title: "About RR Auto Revamp — Delhi's Trusted Auto Parts Supplier",
-    description: "9, The Auto Stores, 1390 Nicholson Rd, Kashmere Gate, Delhi. OEM & aftermarket parts for all brands.",
+    description: "9, 1390, Nicholson Rd, Kashmere Gate, Delhi. OEM & aftermarket parts for all brands.",
     url: "https://rrautorevamp.com/about",
   },
 };
