@@ -8,7 +8,7 @@ const defaultSettings: Record<string, string> = {
   site_tagline: "Premium Automotive Parts",
   contact_phone: "+91 84481 76091",
   contact_email: "rrautopartsking@gmail.com",
-  contact_address: "9, 1390, Nicholson Rd, Kashmere Gate, Delhi, 110006",
+  contact_address: "Shop 1391, Top Floor, Ahata Banwari Lal, Nicholson Rd, Kashmere Gate, Delhi - 110006",
   contact_map_url: "https://maps.app.goo.gl/YLXKF1DAMCxqvPAi9",
   whatsapp_number: "919205876091",
   google_analytics_id: "",
