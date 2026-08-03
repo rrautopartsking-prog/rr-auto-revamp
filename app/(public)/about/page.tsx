@@ -8,11 +8,11 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "About RR Auto Revamp — Car Parts Shop Delhi | Kashmere Gate",
   description:
-    "RR Auto Revamp at Shop 1391, Ahata Banwari Lal, Nicholson Rd, Kashmere Gate, Delhi. Trusted supplier of OEM & aftermarket spare parts for BMW, Mercedes, Audi, Maruti and all brands since years.",
+    "RR Auto Revamp at Shop 1391, Ahata Banwari Lal, Nicholson Rd, Ram Bazar, Kashmere Gate, Delhi. Trusted supplier of OEM & aftermarket spare parts for BMW, Mercedes, Audi, Maruti and all brands since years.",
   alternates: { canonical: "https://rrautorevamp.com/about" },
   openGraph: {
     title: "About RR Auto Revamp — Delhi's Trusted Auto Parts Supplier",
-    description: "Shop 1391, Ahata Banwari Lal, Nicholson Rd, Kashmere Gate, Delhi. OEM & aftermarket parts for all brands.",
+    description: "Shop 1391, Ahata Banwari Lal, Nicholson Rd, Ram Bazar, Kashmere Gate, Delhi. OEM & aftermarket parts for all brands.",
     url: "https://rrautorevamp.com/about",
   },
 };

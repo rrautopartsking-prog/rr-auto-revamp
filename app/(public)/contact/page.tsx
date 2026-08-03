@@ -17,15 +17,13 @@ export default async function ContactPage() {
   const phones = rawPhone.split(",").map((p) => p.trim()).filter(Boolean);
 
   const email    = settings.contact_email    || "info@rrautorevamp.com";
-  const address  = settings.contact_address  || "Shop 1391, Top Floor, Ahata Banwari Lal, Nicholson Rd, Kashmere Gate, Delhi - 110006";
+  const address  = settings.contact_address  || "Shop 1391, Top Floor, Ahata Banwari Lal, Nicholson Rd, Ram Bazar, South Indian Madrasi Colony, Kashmere Gate, Delhi - 110006";
   const whatsapp = (settings.whatsapp_number || "919205876091").replace(/\D/g, "");
-  const mapUrl   = settings.contact_map_url  || "https://maps.app.goo.gl/YLXKF1DAMCxqvPAi9";
+  const mapUrl   = settings.contact_map_url  || "https://maps.app.goo.gl/YLXKF1DAMCxqvPAi9?g_st=ic";
 
   const mapsEmbedSrc =
     settings.contact_map_embed ||
-    `https://maps.google.com/maps?q=${encodeURIComponent(
-      "Shop 1391, Top Floor, Ahata Banwari Lal, Nicholson Rd, Kashmere Gate, Delhi, 110006"
-    )}&output=embed&z=17`;
+    `https://maps.google.com/maps?q=The+Auto+Stores,+1390,+Nicholson+Rd,+Kashmere+Gate,+Delhi,+110006&z=18&output=embed`;
 
   return (
     <div className="min-h-screen bg-carbon-950 pt-20">
